@@ -1,0 +1,46 @@
+{% extends 'applicationBook/base.html' %}
+
+{% block title %}
+Book Site
+{% endblock title %}
+
+
+{% block content %}
+<h1>hello</h3> 
+
+<style>
+    #moya_ssilka {
+        border: 1px solid green; /* Синяя рамка вокруг ссылок */
+        padding: 2px; /* Поля вокруг текста */
+        text-decoration: none; /* Скрываем подчёркивание */
+    }
+    #moya_ssilka:hover {
+        border: 1px solid red; /* Красная рамка при наведении курсора на ссылку */
+    }
+</style>
+
+<a id="moya_ssilka" href="{% url 'addBook' %}" class="btn btn-lg">РАЗМЕСТИТЬ СВОЮ КНИГУ</a>
+<br>
+<br>
+<form method="post" action="{% url 'addBook' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-sm">РАЗМЕСТИТЬ СВОЮ КНИГУ</button>
+</form>
+<ul>
+    {% for elem in cnt %}
+        <h2>{{ elem.title_book }}</h2>
+        <img src="{{ elem.image_book.url }}"alt="Изображение не загрузилось" />
+        <br>
+        <a href="{{ elem.pdf_book.url }}">ЧИТАТЬ ИЛИ СКАЧАТЬ</a>
+        <br>
+        <br>
+        <form method="post" action="{% url 'delete_book' elem.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+        <hr>
+    {% endfor %}
+
+</ul>
+
+{% endblock content %}

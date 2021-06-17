@@ -1,0 +1,20 @@
+{% extends 'applicationBook/base.html' %}
+
+{% block title %}
+    Добавить книгу
+{% endblock title %}
+
+
+{% block content %}
+    Заполните поля информацией про книгу!
+    <br>
+
+  <h2>Upload book</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">ВЫГРУЗИТЬ НА САЙТ</button>
+  </form>
+    
+
+{% endblock content %}
